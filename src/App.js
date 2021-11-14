@@ -1,8 +1,8 @@
 import  { useSelector } from 'react-redux';
-import ContactForm from './ContactForm';
-import ContactList from './ContactList';
-import Contact from './ContactList/Contact';
-import Filter from './Filter';
+import ContactForm from './components/ContactForm';
+import ContactList from './components/ContactList';
+import Contact from './components/ContactList/Contact';
+import Filter from './components/Filter';
 import { v4 as uuidv4 } from 'uuid';
 import { useFetchContactsQuery } from './redux/contactSlice';
 
@@ -26,12 +26,13 @@ function App() {
     return (
       <div className="container">
         <h1 className="title">Phonebook</h1>
-        <ContactForm />
+        <ContactForm contacts={contacts}/>
         <h2 className="title">Contacts</h2>
         <Filter  />      
 
       <ContactList>
-          {filteredContacts.map(contact => (
+         {filterContacts(contacts) &&
+          filterContacts(contacts).map(contact => (
             <Contact key={uuidv4()} contact={contact} />
           ))}
         </ContactList>
